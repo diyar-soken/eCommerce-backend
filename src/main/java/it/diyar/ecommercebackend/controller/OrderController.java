@@ -1,7 +1,6 @@
 package it.diyar.ecommercebackend.controller;
 
 import it.diyar.ecommercebackend.models.Order;
-import it.diyar.ecommercebackend.models.Product;
 import it.diyar.ecommercebackend.repository.OrderRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
