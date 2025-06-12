@@ -19,18 +19,19 @@ public class OrderController {
     private OrderRepository repo;
 
     @GetMapping
-    private List<Order> getAllProducts(){
+    public List<Order> getAllOrders(){
         return repo.findAll();
     }
 
     @PostMapping
-    private Order addProduct(@RequestBody Order order){
+    public Order addOrder(@RequestBody Order order){
         return repo.save(order);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity updateProduct(@PathVariable("id") Long id, @RequestBody Order order) {
+    public ResponseEntity<Object> updateOrder(@PathVariable("id") Long id, @RequestBody Order order) {
         if(repo.findById(id).isPresent()){
+            order.setOrderId(id); // Ensure the ID is set correctly
             repo.save(order);
             return new ResponseEntity<>(order, HttpStatus.OK);
         }else{
@@ -38,8 +39,8 @@ public class OrderController {
         }
     }
 
-    @DeleteMapping
-    private ResponseEntity deleteProduct(@PathVariable("id") Long id){
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deleteOrder(@PathVariable("id") Long id){
         repo.deleteById(id);
         return ResponseEntity.ok().build();
     }

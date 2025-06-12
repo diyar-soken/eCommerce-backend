@@ -1,5 +1,9 @@
 package it.diyar.ecommercebackend.models;
 
+import jakarta.persistence.AttributeOverride;
+import jakarta.persistence.AttributeOverrides;
+import jakarta.persistence.Column;
+import jakarta.persistence.Embedded;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 
@@ -13,8 +17,29 @@ public class Order {
     private String orderDate;
     private String status;
     private String paymentMethod;
+    
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "address", column = @Column(name = "shipping_address")),
+        @AttributeOverride(name = "house_number", column = @Column(name = "shipping_house_number")),
+        @AttributeOverride(name = "zipCode", column = @Column(name = "shipping_zip_code")),
+        @AttributeOverride(name = "city", column = @Column(name = "shipping_city")),
+        @AttributeOverride(name = "state", column = @Column(name = "shipping_state")),
+        @AttributeOverride(name = "country", column = @Column(name = "shipping_country"))
+    })
     private Address shippingAddress;
+    
+    @Embedded
+    @AttributeOverrides({
+        @AttributeOverride(name = "address", column = @Column(name = "billing_address")),
+        @AttributeOverride(name = "house_number", column = @Column(name = "billing_house_number")),
+        @AttributeOverride(name = "zipCode", column = @Column(name = "billing_zip_code")),
+        @AttributeOverride(name = "city", column = @Column(name = "billing_city")),
+        @AttributeOverride(name = "state", column = @Column(name = "billing_state")),
+        @AttributeOverride(name = "country", column = @Column(name = "billing_country"))
+    })
     private Address billingAddress;
+    
     private String trackingNumber;
 
     public long getOrderId() {
