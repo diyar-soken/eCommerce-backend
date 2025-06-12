@@ -1,4 +1,7 @@
 package it.diyar.ecommercebackend.repository;
 
-public class OrderRepository {
+import it.diyar.ecommercebackend.models.Order;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface OrderRepository extends JpaRepository<Order, Long> {
 }
